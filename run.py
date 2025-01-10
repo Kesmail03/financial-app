@@ -1,3 +1,4 @@
+#entry point of the program
 from app import create_app
 
 app = create_app()

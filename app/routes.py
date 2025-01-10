@@ -1,3 +1,4 @@
+#defines the routes
 from flask import Flask, jsonify, request
 from .services import fetch_data
 
