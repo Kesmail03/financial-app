@@ -1,8 +1,12 @@
 #defines the routes
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 from services import fetch_financial_data, filter_data_by_date, sort_data
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
