@@ -1,9 +1,9 @@
 #handles the api logic
 import requests
-from config import Config
 
 def fetch_financial_data(symbol="AAPL"):
-    api_url = f"https://financialmodelingprep.com/api/v3/income-statement/{symbol}?apikey={Config.API_KEY}"
+    API_KEY = os.getenv("API_KEY")
+    api_url = f"https://financialmodelingprep.com/api/v3/income-statement/AAPL?apikey={API_KEY}"
     response = requests.get(api_url)
 
     if response.status_code != 200:
