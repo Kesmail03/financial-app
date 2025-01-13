@@ -1,6 +1,6 @@
 #defines the routes
 from flask import Flask, jsonify, request, Blueprint
-from services import fetch_financial_data, filter_data_by_date, sort_data
+from app.services import fetch_financial_data, filter_data_by_date, sort_data
 from dotenv import load_dotenv
 import os
 
