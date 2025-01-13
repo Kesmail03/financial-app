@@ -1,5 +1,5 @@
 #defines the routes
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Blueprint
 from services import fetch_financial_data, filter_data_by_date, sort_data
 from dotenv import load_dotenv
 import os
@@ -9,8 +9,9 @@ load_dotenv()
 app = Flask(__name__)
 
 API_KEY = os.getenv("API_KEY")
+routes = Blueprint('routes', __name__)
 
-@app.route('/api/data', methods=['GET'])
+@routes.route('/api/data', methods=['GET'])
 def get_data():
     return jsonify({"message": "API is working!"})
     data, status_code = fetch_financial_data()
