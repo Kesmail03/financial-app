@@ -1,8 +1,14 @@
 #defines the routes
 from flask import Flask, jsonify, render_template, request
 from services import fetch_financial_data, filter_data_by_date, sort_data
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
+
+API_KEY = os.getenv("API_KEY")
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
