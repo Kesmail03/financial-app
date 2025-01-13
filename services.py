@@ -1,5 +1,6 @@
 #handles the api logic
 import requests
+import os
 
 def fetch_financial_data(symbol="AAPL"):
     API_KEY = os.getenv("API_KEY")
