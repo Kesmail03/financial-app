@@ -10,12 +10,20 @@ function App() {
 
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
-  const [minRevenue, setMinRevenue] = useState("");
-  const [maxRevenue, setMaxRevenue] = useState("");
   const [sortKey, setSortKey] = useState("date");
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
+    fetch("/api/data")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return response.json();
+      })
+      .then((data) => setData(data))
+      .catch((err) => setError(err.message));
+
     const fetchData = async () => {
       setLoading(true);
       setError(null);
