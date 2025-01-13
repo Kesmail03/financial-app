@@ -4,7 +4,9 @@ import os
 
 def fetch_financial_data(symbol="AAPL"):
     API_KEY = os.getenv("API_KEY")
-    api_url = f"https://financialmodelingprep.com/api/v3/income-statement/AAPL?apikey={API_KEY}"
+    if not API_KEY:
+        raise ValueError("API_KEY not found in environment variables")
+    api_url = f"https://financialmodelingprep.com/api/v3/income-statement/{symbol}?apikey={API_KEY}"
     response = requests.get(api_url)
 
     if response.status_code != 200:
