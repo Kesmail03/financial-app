@@ -1,5 +1,5 @@
 #defines the routes
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, request
 from services import fetch_financial_data, filter_data_by_date, sort_data
 from dotenv import load_dotenv
 import os
@@ -12,6 +12,7 @@ API_KEY = os.getenv("API_KEY")
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
+    return jsonify({"message": "API is working!"})
     data, status_code = fetch_financial_data()
     if not data:
         return jsonify({"error:" "Failed to fetch data"}), status_code
