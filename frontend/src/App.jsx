@@ -3,7 +3,7 @@ import axios from 'axios';
 import "./App.css";
 import "./index.css";
 
-function App() {
+const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,39 +14,20 @@ function App() {
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
-    fetch("/api/data")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return response.json();
-      })
-      .then((data) => setData(data))
-      .catch((err) => setError(err.message));
-
     const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-
       try {
-        const response = await axios.get("http://localhost:5000/api/data", {
-          params: {
-            start_year: startYear || null,
-            end_year: endYear || null,
-            sort_key: sortKey,
-            descending: sortOrder === "desc",
-          },
-        });
-        setData(response.data);
-      } catch (err) {
-        setError("Error fetching data from the server.");
-      } finally {
+        const response = await fetch("/api/data");
+        const result = await response.json();
+        setData(result);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [startYear, endYear, sortKey, sortOrder]);
+  }, []);
 
   const handleSort = (key) => {
     if (sortKey === key) {
@@ -145,6 +126,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
