@@ -13,7 +13,6 @@ routes = Blueprint('routes', __name__)
 
 @routes.route('/api/data', methods=['GET'])
 def get_data():
-    return jsonify({"message": "API is working!"})
     data, status_code = fetch_financial_data()
     if not data:
         return jsonify({"error:" "Failed to fetch data"}), status_code
